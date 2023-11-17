@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  flask:
+    build: .
+    container_name: flask-api
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+      
+  mongo:
+    image: mongo:latest
+    container_name: mongo-db
+    restart: unless-stopped
+    volumes:
+      - ./mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  # postgres:
+  #   image: postgres:latest
+  #   container_name: postgres-db
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_DB: mydatabase
+  #     POSTGRES_USER: myuser
+  #     POSTGRES_PASSWORD: mypassword
+  #   volumes:
+  #     - ./postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+  # minio:
+  #   image: minio/minio:latest
+  #   container_name: minio_server
+  #   restart: unless-stopped
+  #   environment:
+  #     MINIO_ROOT_USER: myuser
+  #     MINIO_ROOT_PASSWORD: mypassword
+  #   volumes:
+  #     - ./minio_data:/data
+  #   ports:
+  #     - "9000:9000" 
+  #     - "9090:9090"
+  #   command: server /data --console-address ":9090"
